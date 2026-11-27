@@ -217,16 +217,8 @@ h3 {
   flex-direction: row;
   display: grid;
   align-items: initial;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: var(--space-2xs);
-}
-
-@media (max-width: 991px) {
-  .mega-menu.brxe-div {
-    justify-items: space-between;
-    display: grid;
-    align-items: initial;
-  }
 }
 
 @media (max-width: 767px) {
@@ -1279,6 +1271,10 @@ span.underline-highlight::after {
 .services-grid:not(#_) .bricks-layout-wrapper {
   --gutter: 30px;
   --columns: 4;
+  /* As the old Isotope grid: every card as tall as the tallest, rows
+     spaced only by the cards' 45px bottom margin. */
+  grid-auto-rows: 1fr;
+  row-gap: 0;
 }
 
 .services-grid:not(#_) .repeater-item [data-field-id="02c62a"] {
@@ -1936,6 +1932,21 @@ span.underline-highlight::after {
   }
 }
 
+/* Network Management: no tint over the background photo. */
+.service-network-management:not(#_)::before {
+  background-image: none;
+}
+
+/* A slightly tighter title underline on these pages, as on the old site. */
+.service-atlas .service-title-wrap:not(#_),
+.service-foreign-travel-ve103b .service-title-wrap:not(#_),
+.service-garage-audit-service-quality-assurance-sqa .service-title-wrap:not(#_),
+.service-maintenance-authorisation-auditing .service-title-wrap:not(#_) {
+  margin-left: -3rem;
+  padding-left: 4.5rem;
+  padding-bottom: 1rem;
+}
+
 /* Darker tint on these pages, as on the old site. */
 .service-pay-bill:not(#_)::before {
   background-image: linear-gradient(rgba(0, 0, 0, 0.64), rgba(0, 0, 0, 0.64));
@@ -1973,6 +1984,8 @@ span.underline-highlight::after {
    the white one. */
 .service-lemon-penguin .service-page-icon:not(#_) {
   content: url("/assets/images/Lemon-Penguin-yellow.svg");
+  width: 113px;
+  height: 113px;
 }
 
 .service-lemon-penguin .services-sub-heading:not(#_) {
@@ -2004,9 +2017,16 @@ span.underline-highlight::after {
   margin-right: 6px;
 }
 
+.image-note.brxe-icon-box .icon {
+  font-size: 12px;
+  line-height: 1;
+  display: flex;
+}
+
 .image-note.brxe-icon-box .icon svg {
   width: 12px;
   height: 12px;
+  display: block;
 }
 
 @media (max-width: 991px) {
@@ -2220,6 +2240,18 @@ span.underline-highlight::after {
 }
 
 /* ---- Additions for the Astro rebuild (not from the old site) ---- */
+
+/* Lists with a line of text between sub-lists (Consultancy Services:
+   "... range from: [list] to [list]"). Markdown wraps those items in
+   paragraphs; keep the old site's spacing. */
+.service-page-text li > p {
+  margin: 0;
+}
+
+.service-page-text li > ul + p {
+  margin-top: 1.9rem;
+  margin-bottom: 1.9rem;
+}
 
 /* Homepage service filters: hidden cards fade and shrink away. */
 .services-grid .bricks-layout-item {
